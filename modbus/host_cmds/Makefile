@@ -24,7 +24,9 @@ libmodbus-$(LIBMODBUS_VER).tar.gz:
 
 $(BUILD_BASE)/libmodbus/lib/pkgconfig/libmodbus.pc : libmodbus-$(LIBMODBUS_VER).tar.gz
 	tar -xf libmodbus-$(LIBMODBUS_VER).tar.gz
-	cd libmodbus-$(LIBMODBUS_VER); ./configure prefix=$(BUILD_BASE)/libmodbus; make install; cd ..;
+	cd libmodbus-$(LIBMODBUS_VER); \
+	./configure --prefix=$(BUILD_BASE)/libmodbus --enable-static --disable-shared; \
+	make install; cd ..;
 
 libmodbus: $(BUILD_BASE)/libmodbus/lib/pkgconfig/libmodbus.pc
 
