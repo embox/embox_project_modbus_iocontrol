@@ -1,3 +1,5 @@
 modbus/emulate
 modbus/host_cmds/build
+modbus/host_cmds/libmodbus-3.1.6/
+modbus/host_cmds/libmodbus-3.1.6.tar.gz
 
