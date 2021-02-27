@@ -13,9 +13,9 @@ LIBS_BASE = $(ROOT_BASE)/libs
 
 CMDS_BASE = $(ROOT_BASE)/cmds
 
-LIBDRV_INCLUDES_BASE = $(ROOT_BASE)/build/libleddrv/include
+LIBDRV_INCLUDES_BASE = $(BUILD_BASE)/libleddrv/include
 
-LD_FLAGS_LIBDRV = -L$(ROOT_BASE)/build/libleddrv -lleddrv
+LD_FLAGS_LIBDRV = -L$(BUILD_BASE)/libleddrv -lleddrv
 LD_FLAGS_LIBMODBUS = -L$(BUILD_BASE)/libmodbus/lib -lmodbus
 
 CFLAGS_LIBDRV_INCLUDES = -I$(LIBDRV_INCLUDES_BASE)
@@ -33,19 +33,19 @@ $(BUILD_BASE)/libmodbus/lib/pkgconfig/libmodbus.pc : libmodbus-$(LIBMODBUS_VER).
 libmodbus: $(BUILD_BASE)/libmodbus/lib/pkgconfig/libmodbus.pc
 
 libleddrv:
-	mkdir -p $(ROOT_BASE)/build/libleddrv
+	mkdir -p $(BUILD_BASE)/libleddrv
 	mkdir -p $(LIBDRV_INCLUDES_BASE)
-	mkdir -p $(ROOT_BASE)/build/libleddrv/objs
-	cp $(LIBS_BASE)/libleddrv/libleddrv.h $(ROOT_BASE)/build/libleddrv/include
-	cp $(LIBS_BASE)/libleddrv_ll/libleddrv_ll.h $(ROOT_BASE)/build/libleddrv/include
-	cp $(LIBS_BASE)/libled_names/led_names.h $(ROOT_BASE)/build/libleddrv/include
-	gcc $(CFLAGS_LIBDRV_INCLUDES) $(LIBS_BASE)/libleddrv/libleddrv.c -c -o $(ROOT_BASE)/build/libleddrv/objs/libleddrv.o
-	gcc $(CFLAGS_LIBDRV_INCLUDES) $(LIBS_BASE)/libleddrv_ll/libleddrv_ll_stub.c -c -o $(ROOT_BASE)/build/libleddrv/objs/libleddrv_ll_stub.o
-	gcc $(CFLAGS_LIBDRV_INCLUDES) $(LIBS_BASE)/libled_names/libled_names.c -c -o $(ROOT_BASE)/build/libleddrv/objs/libled_names.o
-	ar rcs $(ROOT_BASE)/build/libleddrv/libleddrv.a \
-			$(ROOT_BASE)/build/libleddrv/objs/libleddrv.o \
-			$(ROOT_BASE)/build/libleddrv/objs/libleddrv_ll_stub.o \
-			$(ROOT_BASE)/build/libleddrv/objs/libled_names.o
+	mkdir -p $(BUILD_BASE)/libleddrv/objs
+	cp $(LIBS_BASE)/libleddrv/libleddrv.h $(BUILD_BASE)/libleddrv/include
+	cp $(LIBS_BASE)/libleddrv_ll/libleddrv_ll.h $(BUILD_BASE)/libleddrv/include
+	cp $(LIBS_BASE)/libled_names/led_names.h $(BUILD_BASE)/libleddrv/include
+	gcc $(CFLAGS_LIBDRV_INCLUDES) $(LIBS_BASE)/libleddrv/libleddrv.c -c -o $(BUILD_BASE)/libleddrv/objs/libleddrv.o
+	gcc $(CFLAGS_LIBDRV_INCLUDES) $(LIBS_BASE)/libleddrv_ll/libleddrv_ll_stub.c -c -o $(BUILD_BASE)/libleddrv/objs/libleddrv_ll_stub.o
+	gcc $(CFLAGS_LIBDRV_INCLUDES) $(LIBS_BASE)/libled_names/libled_names.c -c -o $(BUILD_BASE)/libleddrv/objs/libled_names.o
+	ar rcs $(BUILD_BASE)/libleddrv/libleddrv.a \
+			$(BUILD_BASE)/libleddrv/objs/libleddrv.o \
+			$(BUILD_BASE)/libleddrv/objs/libleddrv_ll_stub.o \
+			$(BUILD_BASE)/libleddrv/objs/libled_names.o
 
 led-server led-client : CFLAGS += -Wall -g3 -O0 $(CFLAGS_LIBDRV_INCLUDES) $(CFLAGS_LIBMODBUS_INCLUDES)
 
