@@ -5,7 +5,9 @@ LIBMODBUS_VER = 3.1.6
 
 ROOT_BASE = $(PWD)/..
 
-BUILD_BASE = $(ROOT_BASE)/build
+BUILD_BASE = $(ROOT_BASE)/host_cmds/build
+
+EMULATE_BASE = $(ROOT_BASE)/emulate
 
 LIBS_BASE = $(ROOT_BASE)/libs
 
@@ -45,14 +47,19 @@ libleddrv:
 			$(ROOT_BASE)/build/libleddrv/objs/libleddrv_ll_stub.o \
 			$(ROOT_BASE)/build/libleddrv/objs/libled_names.o
 
-led-server led-client : CFLAGS += -Wall $(CFLAGS_LIBDRV_INCLUDES) $(CFLAGS_LIBMODBUS_INCLUDES)
+led-server led-client : CFLAGS += -Wall -g3 -O0 $(CFLAGS_LIBDRV_INCLUDES) $(CFLAGS_LIBMODBUS_INCLUDES)
 
+$(EMULATE_BASE)/leds.txt:
+	mkdir -p $(EMULATE_BASE)
+	cp leds.txt $(EMULATE_BASE)
+	
 led-client : libmodbus
-	gcc $(CFLAGS) led-client.c -o led-client $(LD_FLAGS_LIBMODBUS)
+	gcc $(CFLAGS) led-client.c -o $(EMULATE_BASE)/$@ $(LD_FLAGS_LIBMODBUS)
 
-led-server : libmodbus libleddrv
+led-server : libmodbus libleddrv $(EMULATE_BASE)/leds.txt
 led-server : $(CMDS_BASE)/modbus_server/modbus_server.c
-	$(CC) $(CFLAGS) $(CMDS_BASE)/modbus_server/modbus_server.c -o $@ $(LD_FLAGS_LIBMODBUS) $(LD_FLAGS_LIBDRV)
+	$(CC) $(CFLAGS) $(CMDS_BASE)/modbus_server/modbus_server.c -o $(EMULATE_BASE)/$@ $(LD_FLAGS_LIBMODBUS) $(LD_FLAGS_LIBDRV)
 
 clean :
-	rm -rf $(BUILD_BASE)
+	rm -rf $(BUILD_BASE) $(EMULATE_BASE)/led-server $(EMULATE_BASE)/led-client $(EMULATE_BASE)/leds.txt
+

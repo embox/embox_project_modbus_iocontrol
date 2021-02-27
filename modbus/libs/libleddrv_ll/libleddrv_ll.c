@@ -218,3 +218,7 @@ void leddrv_ll_update(unsigned char leds_state[LEDDRV_LED_N]) {
 	gpio_set(leddrv_str_clk.gpio, leddrv_str_clk.pin, GPIO_PIN_HIGH);
 }
 #endif
+
+void leddrv_load_state(unsigned char leds_state[LEDDRV_LED_N]) {
+}
+

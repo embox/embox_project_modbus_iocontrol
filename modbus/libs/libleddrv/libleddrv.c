@@ -16,16 +16,18 @@
 
 static unsigned char leddrv_leds_state[LEDDRV_LED_N];
 
-static inline void leddrv_ll_do_update(void) {
-	leddrv_ll_update(leddrv_leds_state);
-}
-
 int leddrv_init(void) {
+	int inited = 0;
+	if (inited) {
+		return 0;
+	}
+	inited = 1;
 	leddrv_ll_init();
 
 	/* default all on state */
 	memset(leddrv_leds_state, 0, sizeof(leddrv_leds_state));
-	leddrv_ll_do_update();
+	leddrv_load_state(leddrv_leds_state);
+	leddrv_ll_update(leddrv_leds_state);
 
 	return 0;
 }
@@ -42,7 +44,7 @@ int leddrv_set(unsigned int led_n) {
 	}
 
 	leddrv_leds_state[led_n] = true;
-	leddrv_ll_do_update();
+	leddrv_ll_update(leddrv_leds_state);
 
 	return 0;
 }
@@ -55,7 +57,7 @@ int leddrv_clr(unsigned int led_n) {
 	}
 
 	leddrv_leds_state[led_n] = false;
-	leddrv_ll_do_update();
+	leddrv_ll_update(leddrv_leds_state);
 
 	return 0;
 }
@@ -67,7 +69,7 @@ int leddrv_getstates(unsigned char leds_state[LEDDRV_LED_N]) {
 
 int leddrv_updatestates(unsigned char new_leds_state[LEDDRV_LED_N]) {
 	memcpy(leddrv_leds_state, new_leds_state, sizeof(leddrv_leds_state));
-	leddrv_ll_do_update();
+	leddrv_ll_update(leddrv_leds_state);
 	return 0;
 }
 

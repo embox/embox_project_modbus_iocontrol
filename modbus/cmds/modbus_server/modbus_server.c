@@ -59,6 +59,8 @@ int main(int argc, char*argv[]) {
 	int header_len;
 	int opt;
 
+	leddrv_init();
+
 	while (-1 != (opt = getopt(argc, argv, "a:p:"))) {
 		switch (opt) {
 		case 'a':
@@ -69,7 +71,7 @@ int main(int argc, char*argv[]) {
 			break;
 		}
 	}
-
+	
 	ctx = modbus_new_tcp(ip, port);
 	header_len = modbus_get_header_length(ctx);
 	query = malloc(MODBUS_TCP_MAX_ADU_LENGTH);

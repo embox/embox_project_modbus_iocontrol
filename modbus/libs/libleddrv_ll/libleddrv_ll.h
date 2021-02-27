@@ -15,4 +15,6 @@ extern void leddrv_ll_update(unsigned char leds_state[]);
 
 extern int leddrv_ll_error(int n);
 
+extern void leddrv_load_state(unsigned char leds_state[LEDDRV_LED_N]);
+
 #endif /* LIBLEDDRV_LL_H_ */
