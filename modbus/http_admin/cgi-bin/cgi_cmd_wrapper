@@ -9,8 +9,7 @@ if [ $REQUEST_METHOD = "GET" ]; then
 	echo "Query: $QUERY_STRING" >&2
 	case "$QUERY_STRING" in
 		"c=led_driver&a1=serialize_states")
-			STATES="0, 1"
-			echo [ $(printf "${STATES}, %.0s" {1..39}) $STATES ]
+			echo [ $(cat ../emulate/leds.txt) ]
 			;;
 		"c=led_driver&a1=serialize_errors")
 			echo [ $(printf "0, %.0s" {1..79}) 1 ]
