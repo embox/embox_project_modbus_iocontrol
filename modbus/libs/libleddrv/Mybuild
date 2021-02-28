@@ -1,4 +1,4 @@
-package stm32f4_iocontrol
+package iocontrol.modbus.lib
 
 static module libleddrv {
 	source "libleddrv.c"

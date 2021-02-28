@@ -1,9 +1,9 @@
-package stm32f4_iocontrol
+package iocontrol.modbus.cmd
 
 @AutoCmd
 @Cmd(name="led_names", help="", man="")
 module led_names {
 	source "led_names.c"
 
-	depends libled_names
+	depends iocontrol.modbus.lib.libled_names
 }

@@ -1,8 +1,8 @@
-package stm32f4_iocontrol
+package iocontrol.modbus.cmd
 
 @AutoCmd
 @Cmd(name="led_driver", help="Drives abstract led", man="")
 module led_driver {
 	source "led_driver.c"
-	depends libleddrv
+	depends iocontrol.modbus.lib.libleddrv
 }
