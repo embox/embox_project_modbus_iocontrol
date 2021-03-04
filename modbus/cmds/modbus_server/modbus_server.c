@@ -20,22 +20,12 @@
 static modbus_mapping_t *mb_mapping_wrapper_new(void) {
 	modbus_mapping_t *mb_mapping;
 	mb_mapping = modbus_mapping_new(LEDDRV_LED_N, 0, 0, 0);
-#if 0
-
-	assert(mb_mapping->nb_bits == 0);
-	mb_mapping->nb_bits = LEDDRV_LED_N;
-	assert(mb_mapping->tab_bits == NULL);
-	mb_mapping->tab_bits = leddrv_getstates();
-#endif
 
 	return mb_mapping;
 }
 
 static void mb_mapping_wrapper_free(modbus_mapping_t *mb_mapping) {
-#if 0
-	mb_mapping->nb_bits = 0;
-	mb_mapping->tab_bits = NULL;
-#endif
+
 	modbus_mapping_free(mb_mapping);
 }
 
