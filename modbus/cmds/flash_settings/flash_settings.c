@@ -14,7 +14,6 @@
 
 #include <ifaddrs.h>
 #include <net/inetdevice.h>
-#include <drivers/flash/flash.h>
 
 #include <led_names.h>
 #include <libleddrv.h>
