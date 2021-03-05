@@ -17,7 +17,7 @@
 static unsigned char leddrv_leds_state[LEDDRV_LED_N];
 
 int leddrv_init(void) {
-	int inited = 0;
+	static int inited = 0;
 	if (inited) {
 		return 0;
 	}
