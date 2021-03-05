@@ -1,6 +1,8 @@
 package iocontrol.modbus.lib
 
 static module libleddrv {
+	option number leds_quantity = 80
+
 	source "libleddrv.c"
 
 	@IncludeExport(path="")

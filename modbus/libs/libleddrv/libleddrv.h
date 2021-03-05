@@ -9,7 +9,13 @@
 #ifndef LIBLEDDRV_H_
 #define LIBLEDDRV_H_
 
+#ifdef __EMBOX__
+#include <framework/mod/options.h>
+#include <module/iocontrol/modbus/lib/libleddrv.h>
+#define LEDDRV_LED_N OPTION_MODULE_GET(iocontrol__modbus__lib__libleddrv,NUMBER,leds_quantity)
+#else
 #define LEDDRV_LED_N 80
+#endif
 
 extern int leddrv_init(void);
 
