@@ -26,3 +26,13 @@ Run an emulation on the host:
 * Run Embox `./scripts/qemu/auto_qemu`
 * To run the modbus client. Go to 'modbus/emulate' and run './led-client -a 10.0.2.16 set 78' to set up led 78 to high state or './led-client -a 10.0.2.16 clr 78' to low state
 * Additionally you can check state in your browser if visit page with 10.0.2.16 address
+
+Run on a STM32F4-discovery board
+* Build the modbus client
+* Setup the project as external in Embox `make ext_conf EXT_PROJECT_PATH=<path to root folder of this repo>`. For example `make ext_conf EXT_PROJECT_PATH=~/git/embox_project_modbus_iocontrol`
+* Configure Embox `make confload-ext_project/modbus/stm32f4_discovery_demo`
+* Setup you network settings in 'conf/start_script.inc' file
+* Build Embox `make`
+* Upload image on the board
+* To run the modbus client. Go to 'modbus/emulate' and run './led-client -a <board IP> set 4' to set up led 4 to high state or './led-client -a <board IP> clr 4' to low state
+* Additionally you can check state in your browser if visit page with <board IP> address
