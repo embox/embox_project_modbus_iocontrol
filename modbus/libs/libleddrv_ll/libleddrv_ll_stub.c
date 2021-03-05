@@ -15,7 +15,7 @@
 
 #include "libleddrv_ll.h"
 
-#define LED_FILE_NAME "leds.txt"
+#define LED_FILE_NAME "conf/leds.txt"
 
 void leddrv_ll_init(void) {
 }
