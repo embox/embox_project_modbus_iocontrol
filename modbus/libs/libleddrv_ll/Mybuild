@@ -4,7 +4,7 @@ abstract module libleddrv_ll {
 }
 
 @BuildDepends(third_party.bsp.st_bsp_api)
-static module libleddrv_ll_stm32_f4 extends libleddrv_ll {
+static module libleddrv_ll_stm32_f4_shift extends libleddrv_ll {
 	source "libleddrv_ll.c"
 
 	@IncludeExport(path="")
