@@ -34,5 +34,5 @@ Run on a STM32F4-discovery board
 * Setup you network settings in 'conf/start_script.inc' file
 * Build Embox `make`
 * Upload image on the board
-* To run the modbus client. Go to 'modbus/emulate' and run './led-client -a "board IP" set 4' to set up led 4 to high state or './led-client -a "board IP" clr 4' to low state
+* To run the modbus client. Go to 'modbus/emulate' and run './led-client -a "board IP" set 3' to set up led 3 to high state or './led-client -a "board IP" clr 3' to low state
 * Additionally you can check state in your browser if visit page with "board IP" address
