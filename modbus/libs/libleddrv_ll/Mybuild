@@ -22,7 +22,7 @@ static module libleddrv_ll_stm32_f4_demo extends libleddrv_ll {
 	@IncludeExport(path="")
 	source "libleddrv_ll.h"
 
-	depends embox.driver.gpio.stm32_gpio_f4
+	depends embox.driver.gpio.api
 	depends third_party.bsp.st_bsp_api
 }
 
