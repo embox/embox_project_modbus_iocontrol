@@ -29,7 +29,7 @@ static const struct leddrv_pin_desc leds[] = {
 void leddrv_ll_init(void) {
 	int i;
 	for (i = 0; i < LEDDRV_LED_N; i++) {
-		gpio_setup_mode(leds[i].gpio, leds[i].pin, GPIO_MODE_OUTPUT);
+		gpio_setup_mode(leds[i].gpio, leds[i].pin, GPIO_MODE_OUT);
 	}
 }
 
