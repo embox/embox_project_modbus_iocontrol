@@ -13,4 +13,5 @@
 "flash_settings restore",
 "modbus_server &",
 "ifconfig",
+"stl_demo_sort1",
 "httpd http_admin",
