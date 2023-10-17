@@ -18,7 +18,7 @@
 
 #define LEDS_PER_LINE 8
 #define LINES_N 10
-static_assert(LINES_N * LEDS_PER_LINE == LEDDRV_LED_N);
+static_assert(LINES_N * LEDS_PER_LINE == LEDDRV_LED_N, "wrong LEDDRV_LED_N");
 
 struct leddrv_pin_desc {
 	int gpio; /**< port */
@@ -117,8 +117,8 @@ static const struct leddrv_pin_desc leddrv_alarms[] = {
 };
 #endif
 
-static_assert(ARRAY_SIZE(leddrv_datas) == LINES_N);
-static_assert(ARRAY_SIZE(leddrv_alarms) == LINES_N);
+static_assert(ARRAY_SIZE(leddrv_datas) == LINES_N," Wrong LINES_N");
+static_assert(ARRAY_SIZE(leddrv_alarms) == LINES_N," Wrong LINES_N");
 
 int leddrv_ll_error(int n) {
 	int line = n / LEDS_PER_LINE;
@@ -131,14 +131,14 @@ static inline void leddrv_pin_init(const struct leddrv_pin_desc *pd, unsigned in
 }
 
 void leddrv_ll_init(void) {
-	leddrv_pin_init(&leddrv_shf_clk, GPIO_MODE_OUTPUT);
-	leddrv_pin_init(&leddrv_str_clk, GPIO_MODE_OUTPUT);
+	leddrv_pin_init(&leddrv_shf_clk, GPIO_MODE_OUT);
+	leddrv_pin_init(&leddrv_str_clk, GPIO_MODE_OUT);
 	for (int i = 0; i < LINES_N; ++i) {
-		leddrv_pin_init(&leddrv_datas[i], GPIO_MODE_OUTPUT);
+		leddrv_pin_init(&leddrv_datas[i], GPIO_MODE_OUT);
 	}
 
 	for (int i = 0; i < LINES_N; ++i) {
-		leddrv_pin_init(&leddrv_alarms[i], GPIO_MODE_INPUT);
+		leddrv_pin_init(&leddrv_alarms[i], GPIO_MODE_IN);
 	}
 }
 
