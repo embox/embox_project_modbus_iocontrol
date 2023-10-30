@@ -66,7 +66,7 @@ int main(int argc, char*argv[]) {
 	header_len = modbus_get_header_length(ctx);
 	query = malloc(MODBUS_TCP_MAX_ADU_LENGTH);
 
-	modbus_set_debug(ctx, TRUE);
+	modbus_set_debug(ctx, FALSE);
 
 	mb_mapping = mb_mapping_wrapper_new();
 	if (mb_mapping == NULL) {
