@@ -16,7 +16,7 @@ CMDS_BASE = $(ROOT_BASE)/cmds
 LIBDRV_INCLUDES_BASE = $(BUILD_BASE)/libleddrv/include
 
 LD_FLAGS_LIBDRV = -L$(BUILD_BASE)/libleddrv -lleddrv
-LD_FLAGS_LIBMODBUS = -L$(BUILD_BASE)/libmodbus/lib -lmodbus
+LD_FLAGS_LIBMODBUS = -L$(BUILD_BASE)/libmodbus/lib -lmodbus -lm
 
 CFLAGS_LIBDRV_INCLUDES = -I$(LIBDRV_INCLUDES_BASE)
 CFLAGS_LIBMODBUS_INCLUDES = -I$(BUILD_BASE)/libmodbus/include/modbus
@@ -55,6 +55,7 @@ $(EMULATE_BASE)/conf/leds.txt:
 	
 led-client : libmodbus
 	gcc $(CFLAGS) led-client.c -o $(EMULATE_BASE)/$@ $(LD_FLAGS_LIBMODBUS)
+	gcc $(CFLAGS) led-client.c -o $@ $(LD_FLAGS_LIBMODBUS)
 
 led-server : libmodbus libleddrv $(EMULATE_BASE)/conf/leds.txt
 led-server : $(CMDS_BASE)/modbus_server/modbus_server.c

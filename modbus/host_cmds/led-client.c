@@ -12,8 +12,38 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <time.h>
+#include <assert.h>
+#include <math.h>
 
 #include <modbus.h>
+
+static struct timespec diff_timespec(const struct timespec *time1,
+    const struct timespec *time0) {
+  assert(time1);
+  assert(time0);
+  struct timespec diff = {.tv_sec = time1->tv_sec - time0->tv_sec, //
+      .tv_nsec = time1->tv_nsec - time0->tv_nsec};
+  if (diff.tv_nsec < 0) {
+    diff.tv_nsec += 1000000000; // nsec/sec
+    diff.tv_sec--;
+  }
+  return diff;
+}
+
+static void print_timespec(struct timespec spec) {
+	long            ms;
+    time_t          s;
+
+	s  = spec.tv_sec;
+    ms = round(spec.tv_nsec / 1.0e6);
+    if (ms > 999) {
+        s++;
+        ms = 0;
+    }
+	ms += (s * 1000);
+    printf("%ld millisecond\n", ms);
+}
 
 int main(int argc, char *argv[]) {
 	const char *ip = "127.0.0.1";
@@ -23,6 +53,8 @@ int main(int argc, char *argv[]) {
 	unsigned int bit_n;
 	bool input_err;
 	int opt;
+	struct timespec spec_start, spec_stop;
+ 
 
 	while (-1 != (opt = getopt(argc, argv, "a:p:"))) {
 		switch (opt) {
@@ -71,13 +103,17 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 
-
+	//time_t time_begin = time_now();
+	clock_gettime(CLOCK_REALTIME, &spec_start);
 	if (1 == modbus_write_bit(ctx, bit_n, bit_value)) {
 		printf("OK\n");
 	} else {
 		printf("FAILED\n");
 	}
-
+	//time_t time_end = time_now();
+	clock_gettime(CLOCK_REALTIME, &spec_stop);
+	print_timespec(diff_timespec(&spec_stop, &spec_start));
+	
 	/* Close the connection */
 	modbus_close(ctx);
 	modbus_free(ctx);
