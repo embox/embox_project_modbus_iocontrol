@@ -42,7 +42,7 @@ static void print_timespec(struct timespec spec) {
         ms = 0;
     }
 	ms += (s * 1000);
-    printf("%ld millisecond\n", ms);
+    printf("%ld milliseconds\n", ms);
 }
 
 int main(int argc, char *argv[]) {
