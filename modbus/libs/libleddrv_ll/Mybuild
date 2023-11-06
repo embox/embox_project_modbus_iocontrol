@@ -4,26 +4,23 @@ abstract module libleddrv_ll {
 }
 
 @BuildDepends(third_party.bsp.st_bsp_api)
-static module libleddrv_ll_stm32_f4_shift extends libleddrv_ll {
-	source "libleddrv_ll_stm32_f4_shift.c"
-
-	@IncludeExport(path="")
-	source "libleddrv_ll.h"
-
-	depends embox.driver.gpio.stm32_gpio_f4
-	depends third_party.bsp.st_bsp_api
-}
-
-@BuildDepends(third_party.bsp.st_bsp_api)
-static module libleddrv_ll_stm32_f4_demo extends libleddrv_ll {
-	@IncludePath("$(CONF_DIR)")
-	source "libleddrv_ll_stm32_f4_demo.c"
+static module libleddrv_ll_gpio_shift extends libleddrv_ll {
+	source "libleddrv_ll_gpio_shift.c"
 
 	@IncludeExport(path="")
 	source "libleddrv_ll.h"
 
 	depends embox.driver.gpio.api
-	depends third_party.bsp.st_bsp_api
+}
+
+static module libleddrv_ll_gpio extends libleddrv_ll {
+	@IncludePath("$(CONF_DIR)")
+	source "libleddrv_ll_gpio.c"
+
+	@IncludeExport(path="")
+	source "libleddrv_ll.h"
+
+	depends embox.driver.gpio.api
 }
 
 static module libleddrv_ll_stub extends libleddrv_ll {
