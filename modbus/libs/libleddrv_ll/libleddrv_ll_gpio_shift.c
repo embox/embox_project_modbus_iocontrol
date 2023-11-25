@@ -219,6 +219,6 @@ void leddrv_ll_update(unsigned char leds_state[LEDDRV_LED_N]) {
 }
 #endif
 
-void leddrv_load_state(unsigned char leds_state[LEDDRV_LED_N]) {
+void leddrv_load_state(unsigned char leds_state[]) {
 }
 

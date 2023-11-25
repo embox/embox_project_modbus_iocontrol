@@ -33,7 +33,7 @@ void leddrv_ll_init(void) {
 	}
 }
 
-void leddrv_ll_update(unsigned char leds_state[LEDDRV_LED_N]) {
+void leddrv_ll_update(unsigned char leds_state[]) {
 	int i;
 
 	for (i = 0; i < LEDDRV_LED_N; i++) {
@@ -46,5 +46,5 @@ int leddrv_ll_error(int n) {
 	return 0;
 }
 
-void leddrv_load_state(unsigned char leds_state[LEDDRV_LED_N]) {
+void leddrv_load_state(unsigned char leds_state[]) {
 }

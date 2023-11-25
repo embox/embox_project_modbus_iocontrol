@@ -23,8 +23,8 @@ void leddrv_ll_init(void) {
 void leddrv_ll_update(unsigned char leds_state[LEDDRV_LED_N]) {
 	int i;
 	int idx;
-	char buff[LEDDRV_LED_N * 2]; 
-	
+	char buff[LEDDRV_LED_N * 2];
+
 	for (i = 0; i < LEDDRV_LED_N; i++) {
 		char state = !!leds_state[i];
 		fprintf(stderr, "led(%03d)=%d\n", i, state);
@@ -45,10 +45,10 @@ int leddrv_ll_error(int n) {
 	return 0;
 }
 
-void leddrv_load_state(unsigned char leds_state[LEDDRV_LED_N]) {
+void leddrv_load_state(unsigned char leds_state[]) {
 	int i;
 	int idx;
-	char buff[LEDDRV_LED_N * 2]; 
+	char buff[LEDDRV_LED_N * 2];
 
 	idx = open(LED_FILE_NAME, O_RDWR);
 	if (idx < 0) {
@@ -56,7 +56,7 @@ void leddrv_load_state(unsigned char leds_state[LEDDRV_LED_N]) {
 	}
 	read(idx, buff, (LEDDRV_LED_N * 2));
 	close(idx);
-	
+
 	for (i = 0; i < LEDDRV_LED_N; i++) {
 		leds_state[i] = buff[i * 2] - '0';
 	}
