@@ -20,7 +20,7 @@
 void leddrv_ll_init(void) {
 }
 
-void leddrv_ll_update(unsigned char leds_state[LEDDRV_LED_N]) {
+void leddrv_ll_update(unsigned char leds_state[]) {
 	int i;
 	int idx;
 	char buff[LEDDRV_LED_N * 2];
@@ -61,4 +61,3 @@ void leddrv_load_state(unsigned char leds_state[]) {
 		leds_state[i] = buff[i * 2] - '0';
 	}
 }
-

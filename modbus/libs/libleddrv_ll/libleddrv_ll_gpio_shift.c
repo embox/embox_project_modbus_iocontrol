@@ -143,7 +143,7 @@ void leddrv_ll_init(void) {
 }
 
 #if LEDBLOCK_MAJOR == 1
-static void leddrv_ll_shift_out(int led_in_line, unsigned char leds_state[LEDDRV_LED_N]) {
+static void leddrv_ll_shift_out(int led_in_line, unsigned char leds_state[]) {
 
 	/* set clock low */
 	gpio_set(leddrv_clk.gpio, leddrv_clk.pin, GPIO_PIN_LOW);
@@ -167,7 +167,7 @@ static void leddrv_ll_shift_out(int led_in_line, unsigned char leds_state[LEDDRV
 }
 
 
-void leddrv_ll_update(unsigned char leds_state[LEDDRV_LED_N]) {
+void leddrv_ll_update(unsigned char leds_state[]) {
 
 	/* shift-register connected as
 	 * shift-out-0 -> led-4
@@ -193,7 +193,7 @@ void leddrv_ll_update(unsigned char leds_state[LEDDRV_LED_N]) {
 #endif
 
 #if LEDBLOCK_MAJOR == 2
-void leddrv_ll_update(unsigned char leds_state[LEDDRV_LED_N]) {
+void leddrv_ll_update(unsigned char leds_state[]) {
 
 	gpio_set(leddrv_str_clk.gpio, leddrv_str_clk.pin, GPIO_PIN_HIGH);
 
