@@ -8,7 +8,7 @@
 "netmanager",
 "msleep 1000",
 
-"ls /dev",
+//"ls /dev",
 "mkdir -v /conf",
 "mount -t DumbFS /dev/stm32flash0 /conf",
 "led_driver init",

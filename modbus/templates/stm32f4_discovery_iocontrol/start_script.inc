@@ -5,18 +5,14 @@
 "ifconfig eth0 192.168.2.128 netmask 255.255.255.0 hw ether AA:BB:CC:DD:EE:02 up",
 "route add 192.168.2.0 netmask 255.255.255.0 eth0",
 */
-
 "netmanager",
-
 "msleep 1000",
 
+//"ls /dev",
 "mkdir -v /conf",
-
-"ls /dev",
-
 "mount -t DumbFS /dev/stm32flash0 /conf",
 "led_driver init",
 "flash_settings restore",
-"modbus_server &",
+"service modbus_server",
 "ifconfig",
-"httpd http_admin",
+"service httpd http_admin",
