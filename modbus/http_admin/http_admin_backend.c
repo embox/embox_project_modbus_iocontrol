@@ -18,7 +18,7 @@
 #include <cJSON.h>
 #include <embox/cmd.h>
 #include <kernel/printk.h>
-#include <hal/arch.h>
+#include <hal/platform.h>
 
 EMBOX_CMD(http_admin_main);
 
@@ -147,7 +147,7 @@ static void http_admin_post(char *post_data) {
 		if (!system("flash_settings store net")) {
 			printk("Net configuration is saved succesffully\n");
 			printk("\tRebooting now to apply new net config...\n");
-			arch_shutdown(ARCH_SHUTDOWN_MODE_REBOOT);
+			platform_shutdown(SHUTDOWN_MODE_REBOOT);
 		} else {
 			printk("Net configuration saving failed\n");
 		}
